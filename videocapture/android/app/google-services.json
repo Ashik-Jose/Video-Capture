@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "77491826249",
+    "project_id": "videocapture-8c5de",
+    "storage_bucket": "videocapture-8c5de.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77491826249:android:dca922a56c273195e19998",
+        "android_client_info": {
+          "package_name": "com.example.videocapture"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77491826249-fpbj1tunck9otqn2r1210nciahuhnsgp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.videocapture",
+            "certificate_hash": "4007ba8b452789cdef11cdf7ce551e4e4619d47f"
+          }
+        },
+        {
+          "client_id": "77491826249-hc13636586qj3s43llh455e3fs7kf8lr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4J__jbkVtS2yvyWpyzSYq2JjZveY1swA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77491826249-hc13636586qj3s43llh455e3fs7kf8lr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
