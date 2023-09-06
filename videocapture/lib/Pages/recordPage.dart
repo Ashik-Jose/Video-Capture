@@ -33,8 +33,6 @@ class _RecordPageState extends State<RecordPage> {
     });
   }
 
-  _recordVideo() async {}
-
   @override
   void initState() {
     super.initState();

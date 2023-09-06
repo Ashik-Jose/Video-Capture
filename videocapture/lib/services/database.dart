@@ -11,8 +11,10 @@ class DatabaseService {
       FirebaseFirestore.instance.collection('videos');
   final storageRef = FirebaseStorage.instance.ref();
 
-  Future createUser() async {
+  Future createUser(String name) async {
+    print("Document Creation");
     return await userCollection.doc(uid).set({
+      'name': name,
       'video': [],
     });
   }
@@ -34,4 +36,6 @@ class DatabaseService {
     });
     });
   }
+
+
 }

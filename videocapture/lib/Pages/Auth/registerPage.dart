@@ -9,7 +9,8 @@ import 'package:videocapture/services/locations.dart';
 import '../../modal/otpDialog.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+  final Function toggleView;
+  const RegisterPage({super.key,required this.toggleView});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -22,6 +23,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    String phoneNumber='',name='';
     return SafeArea(
       child: Scaffold(
           body: SingleChildScrollView(
@@ -33,9 +35,9 @@ class _RegisterPageState extends State<RegisterPage> {
               const SizedBox(height: 100),
               Container(
                 margin:const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                child: const TextField(
+                child:  TextField(
                     keyboardType: TextInputType.name,
-                    decoration:  InputDecoration(
+                    decoration:  const InputDecoration(
                         border:  OutlineInputBorder(
                           borderRadius:  BorderRadius.all(
                              Radius.circular(30),
@@ -48,13 +50,14 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         hintText: "Enter Your Name...",
                         fillColor: Colors.white70),
+                        onChanged: (value) => name = value,
                   ),
               ),
               Container(
                 margin:const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                child: const TextField(
+                child: TextField(
                     keyboardType: TextInputType.phone,
-                    decoration:  InputDecoration(
+                    decoration:  const InputDecoration(
                         border:  OutlineInputBorder(
                           borderRadius:  BorderRadius.all(
                              Radius.circular(30),
@@ -67,13 +70,14 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         hintText: "Enter Your Phone Number...",
                         fillColor: Colors.white70),
+                        onChanged: (value) => phoneNumber = value,
                   ),
               ),
                 const SizedBox(height: 50),
                 ElevatedButton(
-                  onPressed: (){
-                    showDialog(context: context, builder: (context)=>otpDialog(context));
+                  onPressed: () async{
                     // _auth.verifyNumber("+44 7444 555666","123456");
+                   await showDialog(context: context, builder: (context)=>otpDialog(context,phoneNumber,name));
                   },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -82,9 +86,16 @@ class _RegisterPageState extends State<RegisterPage> {
                   ), 
                   child: const Padding(
                     padding: EdgeInsets.fromLTRB(15,15,15,15),
-                    child: Text('Generate OTP'),
+                    child: Text('Register'),
                   ),
                   ),
+                  TextButton(
+                    onPressed: (){
+                      // Future<List<geo.Placemark>?> address=fetchLocation(location);
+                      // print(address);
+                      widget.toggleView();
+                    }, 
+                    child: const Text('Already Registered? Sign In'))
             ],
                   ),
                 ),

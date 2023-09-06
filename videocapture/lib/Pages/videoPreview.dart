@@ -13,11 +13,10 @@ class VideoPreview extends StatefulWidget {
 }
 
 class _VideoPreviewState extends State<VideoPreview> {
-
   late VideoPlayerController _videoPlayerController;
 
   @override
-  void dispose(){
+  void dispose() {
     _videoPlayerController.dispose();
     super.dispose();
   }
@@ -38,34 +37,40 @@ class _VideoPreviewState extends State<VideoPreview> {
         backgroundColor: Colors.black26,
         elevation: 0.0,
         leading: IconButton(
-          onPressed: (){
+          onPressed: () {
             Navigator.pop(context);
-          }, 
-          icon: const Icon(Icons.close_outlined,color: Colors.white,),
+          },
+          icon: const Icon(
+            Icons.close_outlined,
+            color: Colors.white,
           ),
-          actions: [
-            IconButton(
-              onPressed: (){
-                print('Captured');
-                DatabaseService(uid: 'N3SfgrnYEkdesYIGzghtAxX7R703').addVideos(widget.file, 'video1', 'Paika', 'Movie');
-              }, 
-              icon: const Icon(Icons.check,color: Colors.white,),
-              )
-          ],
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              print('Captured');
+              DatabaseService(uid: 'N3SfgrnYEkdesYIGzghtAxX7R703')
+                  .addVideos(widget.file, 'video1', 'Paika', 'Movie');
+            },
+            icon: const Icon(
+              Icons.check,
+              color: Colors.white,
+            ),
+          )
+        ],
       ),
       extendBodyBehindAppBar: true,
-      body: FutureBuilder(future: _initVideoPlayer(),
-      builder: (context,state) {
-        if(state.connectionState==ConnectionState.done)
-        {
-          return VideoPlayer(_videoPlayerController);
-          
-        }
-        else
-        {
-          return const Center(child: CircularProgressIndicator(),);
-        }
-      },
+      body: FutureBuilder(
+        future: _initVideoPlayer(),
+        builder: (context, state) {
+          if (state.connectionState == ConnectionState.done) {
+            return VideoPlayer(_videoPlayerController);
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     );
   }

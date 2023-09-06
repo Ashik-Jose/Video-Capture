@@ -9,7 +9,8 @@ import 'package:videocapture/services/locations.dart';
 import '../../modal/otpDialog.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  final Function toggleView;
+  const LoginPage({super.key,required this.toggleView});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -22,6 +23,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    String phoneNumber='';
     return SafeArea(
       child: Scaffold(
           body: SingleChildScrollView(
@@ -33,9 +35,9 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 100),
               Container(
                 margin:const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                child: const TextField(
+                child: TextField(
                     keyboardType: TextInputType.phone,
-                    decoration:  InputDecoration(
+                    decoration:  const InputDecoration(
                         border:  OutlineInputBorder(
                           borderRadius:  BorderRadius.all(
                              Radius.circular(30),
@@ -48,13 +50,14 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         hintText: "Enter Your Phone Number...",
                         fillColor: Colors.white70),
+                        onChanged: (value) => phoneNumber = value,
                   ),
               ),
                 const SizedBox(height: 50),
                 ElevatedButton(
-                  onPressed: (){
-                    // _auth.verifyNumber("+44 7444 555666","123456");
-                    showDialog(context: context, builder: (context)=>otpDialog(context));
+                  onPressed: () async{
+                   await _auth.verifyNumber(phoneNumber,'',"");
+                    showDialog(context: context, builder: (context)=>otpDialog(context,phoneNumber,""));
                   },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -68,10 +71,11 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   TextButton(
                     onPressed: (){
-                      Future<List<geo.Placemark>?> address=fetchLocation(location);
-                      print(address);
+                      // Future<List<geo.Placemark>?> address=fetchLocation(location);
+                      // print(address);
+                      widget.toggleView();
                     }, 
-                    child: const Text('Test'))
+                    child: const Text('Not Registered? Sign Up'))
             ],
                   ),
                 ),
